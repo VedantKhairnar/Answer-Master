@@ -1,26 +1,36 @@
 import re
 from nltk.stem import PorterStemmer
+import spacy
 
+spacy_nlp = spacy.load('en_core_web_sm')
 
 def findIntersection(lst1, lst2):
     ps = PorterStemmer()
-    lst3 = [ps.stem(value.lower()) for value in lst1 if value in lst2]
-    # print(lst3)
+    #print("lst1",lst1)
+    #print("lst2",lst2)
+    lst3 = [value for value in lst1 if ps.stem(value.lower()) in lst2]
+    #print(lst3)
     return lst3
 
 
 def findAnswer(f, question):
     # f = open("demo", "r").read()
-    s = ''.join(f.split("\n"))
-    s = re.sub("[!?\"]", " ", s)
-
-    l = s.split(".")
+    '''
+    doc = spacy_nlp(f)
+    tokens = [token.text for token in doc if not token.is_stop]
+    s = ""
+    for tok in tokens:
+        s += tok + " "
+    '''
+    l = f.split(".")
 
     l = [i for i in l if i != '']
 
     # question = input("Enter the question.")
     ps = PorterStemmer()
-    ql = [ps.stem(i.lower()) for i in question.split() if len(i) > 3]
+    qdoc = spacy_nlp(question)
+    qtok = [token.text for token in qdoc if not token.is_stop]
+    ql = [ps.stem(i.lower()) for i in qtok]
 
     intersection = [len(findIntersection(i.split(), ql)) for i in l]
 
@@ -33,3 +43,10 @@ def findAnswer(f, question):
     # Who felt worried
     # Who enjoyed looking at the tall trees and lovely flowers
     # Apart from tall trees what did he enjoy
+'''
+f = input("Passage:")
+a = input("que")
+psg = "Walton was a lawer. He had 3 daughters. His Daughter was a Doctor."
+que = "who was doctor ?"
+print(findAnswer(psg,que))
+'''

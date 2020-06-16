@@ -4,15 +4,6 @@ import QA as qa
 app = Flask(__name__)
 
 
-@app.route('/answer', methods=['POST'])
-def recommend():
-    if request.method == "POST":
-        passage = request.form['passage']
-        question = request.form['question']
-        answer = qa.findAnswer(passage, question)
-    return render_template('index.html', answer=answer)
-
-
 @app.route('/')
 def redirection():
     return redirect('/home')
@@ -23,6 +14,29 @@ def homePage():
     return render_template('index.html')
 
 
-if __name__ == '__main__':
+@app.route('/qapage')
+def qapage():
+    return render_template('work.html')
+
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    '''
+    For rendering results on HTML GUI
+    '''
+    passage = request.form['para']
+    question = request.form['que']
+
+    sol = qa.findAnswer(passage, question)
+
+    return render_template('ans.html', prediction_text='Answer is: {}'.format(sol))
+
+
+@app.route('/ans', methods=['POST'])
+def ans():
+    return render_template('work.html')
+
+
+if __name__ == "__main__":
     app.debug = True
     app.run()

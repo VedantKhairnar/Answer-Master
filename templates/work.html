@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Question Answer</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">  
+    <style> body{background-image: linear-gradient(-90deg, #f9484a, #fbd72b );
+      background-color: #f9484a;}
+    </style>
+</head>
+
+<body >
+    <h1 style=" margin-top: 50px;
+    margin-left: 30px;
+    font-family: Aclonica;
+    color: rgb(218, 39, 23);
+    filter: blur(0px);">Question Answering System</h1>
+
+    <p style=" margin-top: 50px;
+    margin-left: 30px;
+    font-family: Aclonica;
+    color: rgb(218, 39, 23);
+    filter: blur(0px);">We answer your question from the provided data!!</p>
+    
+    <h3 style=" margin-top: 20px;
+                margin-left: 30px;
+                font-family: Aclonica;
+                color: rgb(218, 39, 23);
+                filter: blur(0px);">Kindly provide the passage:</h3>
+  <form action="{{ url_for('predict')}}"method="post" id="userform">
+    <textarea form="userform"  class="form-control-lg" 
+              name = "para"
+              style="font-family: Aclonica;
+              filter: blur(0px);
+              margin-top: 30px;
+              width: 550px;
+              height: 180px;
+              margin-left: 75px;" placeholder="Hey There!! Waiting for your input."></textarea>
+    
+     <img
+        src="../static/script.png" 
+        style="width: 300px;margin-left: 200px;">
+
+        </br>
+      </br>
+      </br>
+      </br>
+        <h3 style=" margin-top: 20px;
+        margin-left: 30px;
+        font-family: Aclonica;
+        color: rgb(218, 39, 23);
+        filter: blur(0px);">Ask Your Question</h3>
+      
+        <input type="text"  class="form-control-lg" 
+              name = "que"
+              style="font-family: Aclonica;
+              filter: blur(0px);
+              margin-top: 30px;
+              width: 550px;
+              height: 50px;
+              margin-left: 75px;" placeholder="Question Please!"></input>
+
+        <img
+        src="../static/question.png" 
+        style="width: 100px;margin-left: 300px;">
+            <button class="btn btn-primary btn-block border rounded shadow" 
+                    type="submit" style="font-family: Aclonica;
+                    color: #fbd72b;
+                    background-color: #f9484a;
+                    height: 50px;
+                    width: 250px;
+                    margin-top: 30px;
+                    margin-bottom: 20px;
+                    margin-left: 200px;
+                    margin-right: 500px;">Ask!</button>
+    </form>
+  </br>
+    <!-- <h3 style=" margin-top: 20px;
+      margin-left: 30px;
+      font-family: Aclonica;
+      color: rgb(218, 39, 23);">{{ prediction_text }}</h3>
+    <img
+    src={{src}} alt=".."
+    style="width: 100px;margin-left: 300px;"> -->
+</body>
+
+</html>
